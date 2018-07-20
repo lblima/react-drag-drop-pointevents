@@ -5,25 +5,25 @@ const CIRCLE_DIAMETER = 100;
 export default class DragItem extends React.Component {
   state = {
     gotCapture: false,
-    circleLeft: 80,
-    circleTop: 80,
+    circleLeft: 500,
+    circleTop: 100,
   };
   isDragging = false;
   previousLeft = 0;
   previousTop = 0;
 
-  onDown = event => {
+  onDown = e => {
     this.isDragging = true;
-    event.target.setPointerCapture(event.pointerId);
+    e.target.setPointerCapture(e.pointerId);
 
-    this.extractPositionDelta(event);
+    this.getDelta(e);
   };
 
-  onMove = event => {
+  onMove = e => {
     if (!this.isDragging) {
       return;
     }
-    const {left, top} = this.extractPositionDelta(event);
+    const {left, top} = this.getDelta(e);
 
     this.setState(({circleLeft, circleTop}) => ({
       circleLeft: circleLeft + left,
@@ -31,14 +31,14 @@ export default class DragItem extends React.Component {
     }));
   };
 
-  onUp = event => (this.isDragging = false);
-  onGotCapture = event => this.setState({gotCapture: true});
-  onLostCapture = event =>
+  onUp = e => (this.isDragging = false);
+  onGotCapture = e => this.setState({gotCapture: true});
+  onLostCapture = e =>
     this.setState({gotCapture: false});
 
-  extractPositionDelta = event => {
-    const left = event.pageX;
-    const top = event.pageY;
+  getDelta = e => {
+    const left = e.pageX;
+    const top = e.pageY;
     const delta = {
       left: left - this.previousLeft,
       top: top - this.previousTop,
