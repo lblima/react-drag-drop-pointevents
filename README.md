@@ -1,1 +1,1 @@
-This project is a example if how to use Point Events
+This project is a example if how to use Point Events.
