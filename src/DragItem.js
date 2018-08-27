@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CIRCLE_DIAMETER = 100;
+const CIRCLE_DIAMETER = 120;
 
 export default class DragItem extends React.Component {
   state = {
